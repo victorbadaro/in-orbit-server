@@ -16,14 +16,14 @@ export async function createGoalCompletion({
 		db
 			.select({
 				goalId: goalCompletions.goalId,
-				completionCount: count(goalCompletions.id).as('completion_count')
+				completionCount: count(goalCompletions.id).as('completionCount')
 			})
 			.from(goalCompletions)
 			.where(
 				and(
 					gte(goalCompletions.createdAt, firstDayOfWeek),
 					lte(goalCompletions.createdAt, lastDayOfWeek),
-					eq(goalCompletions.id, goalId)
+					eq(goalCompletions.goalId, goalId)
 				)
 			)
 			.groupBy(goalCompletions.goalId)
